@@ -4,9 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace learn.net.ViewModel
 {
+    public enum KetQua
+    {
+        TrungMa,
+        ThanhCong
+    }
     public class SinhVienViewModel
     {
         public int ID { get; set; }
@@ -59,5 +65,78 @@ namespace learn.net.ViewModel
             return rs;
 
         }
+        public static KetQua AddSinhVien(SinhVien sv)
+        {
+            var db = new Model1();
+           int count=  db.SinhViens.Where(e => e.MaSinhVien == sv.MaSinhVien).Count(); 
+            if(count> 0)
+            {
+                return KetQua.TrungMa; 
+            }
+          
+              else
+            {
+                db.SinhViens.Add(sv);
+                db.SaveChanges();
+                return KetQua.ThanhCong;
+            }
+        }
+      /*  public static void getSinhVien (String maSV)
+        {
+            var db = new Model1(); 
+
+        }*/
+
+
+        public static KetQua DeleteSinhVien(String maSV)
+        {
+            var db = new Model1();
+            var flag = false;
+            var result = db.SinhViens.Where(e => e.MaSinhVien == maSV).ToList();
+            foreach (var sv in result)
+            {
+               
+                if (sv != null)
+                {
+                    db.SinhViens.Remove(sv);
+                    flag = true; 
+                }
+                else
+                {
+                    flag = false; 
+
+                }
+              
+            }
+            if(flag == true  )
+            {
+                 db.SaveChanges();
+                 return KetQua.ThanhCong; 
+            }
+            else
+            {
+                return KetQua.TrungMa;
+
+            }
+        }
+        public static KetQua UpdateSinhVien(SinhVien sv)
+        {
+            var db = new Model1();
+            var flag = false;
+            var count = db.SinhViens.Where(e => e.MaSinhVien == sv.MaSinhVien).Count();
+            if (count == 0)
+            {
+                return KetQua.TrungMa;
+            }
+
+            else
+            {
+                db.SinhViens.Add(sv);
+                db.SaveChanges();
+                return KetQua.ThanhCong;
+            }
+
+        }
+
     }
 }

@@ -25,7 +25,13 @@ namespace learn.net
                 return cbLopHoc.SelectedItem as LopHocViewModel;
             }
         }
-
+        public SinhVienViewModel selectedSinhVien
+        {
+            get
+            {
+                return bdsSinhVien.Current as SinhVienViewModel;
+            }
+        }
         void NapDsLopHoc()
         {
             var ls = LopHocViewModel.GetList();
@@ -40,7 +46,8 @@ namespace learn.net
             if (selectedLopHoc != null)
             {
                 var ls = SinhVienViewModel.GetList(selectedLopHoc.ID);
-                gridSinhVien.DataSource = ls;
+                bdsSinhVien.DataSource = ls;
+                gridSinhVien.DataSource = bdsSinhVien;
             }
 
         }
@@ -55,5 +62,57 @@ namespace learn.net
         {
             NapDsSinhVien();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var f = new frmSinhVien();
+            var rs = f.ShowDialog();
+            if (rs == DialogResult.OK)
+            {
+                NapDsSinhVien();
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+
+            if (SinhVienViewModel.DeleteSinhVien(selectedSinhVien.MaSinhVien) == KetQua.ThanhCong)
+            {
+                MessageBox.Show($"Đã xóa thành công {selectedSinhVien.Ten}");
+                NapDsSinhVien();
+             
+            }
+            else
+            {
+                MessageBox.Show("Lỗi rồi");
+            }
+        }
+
+
     }
 }
