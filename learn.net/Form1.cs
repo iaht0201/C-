@@ -1,4 +1,5 @@
-﻿using learn.net.ViewModel;
+﻿using learn.net.Services;
+using learn.net.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,8 +35,9 @@ namespace learn.net
         }
         void NapDsLopHoc()
         {
-            var ls = LopHocViewModel.GetList();
+            var ls = LopHocService.GetList();
             cbLopHoc.DataSource = ls;
+       /*     cbLopHoc.ValueMember = "ID"; */
             cbLopHoc.DisplayMember = "TenLop";
 
         }
@@ -45,7 +47,7 @@ namespace learn.net
 
             if (selectedLopHoc != null)
             {
-                var ls = SinhVienViewModel.GetList(selectedLopHoc.ID);
+                var ls = SinhVienService.GetList(selectedLopHoc.ID);
                 bdsSinhVien.DataSource = ls;
                 gridSinhVien.DataSource = bdsSinhVien;
             }
@@ -80,7 +82,7 @@ namespace learn.net
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -95,24 +97,86 @@ namespace learn.net
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-
+            if(selectedSinhVien != null)
+            {
+                var f = new frmSinhVien(selectedSinhVien); 
+                if(f.ShowDialog() == DialogResult.OK)
+                {
+                    NapDsSinhVien();
+                }
+            }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+          if(selectedSinhVien !=null)
+            {
+               var rs = MessageBox.Show("Ban co chac muon xoa", "Chu y", MessageBoxButtons.OKCancel);
+                if (rs == DialogResult.OK)
+                {
+                    /*   if (SinhVienViewModel.DeleteSinhVien(selectedSinhVien.MaSinhVien) == KetQua.ThanhCong)
+                       {
+                           MessageBox.Show($"Đã xóa thành công {selectedSinhVien.Ten}");
+                           NapDsSinhVien();
 
-            if (SinhVienViewModel.DeleteSinhVien(selectedSinhVien.MaSinhVien) == KetQua.ThanhCong)
-            {
-                MessageBox.Show($"Đã xóa thành công {selectedSinhVien.Ten}");
-                NapDsSinhVien();
-             
+                       }
+                       else
+                       {
+                           MessageBox.Show("Lỗi rồi");
+                       }*/
+
+                    SinhVienService.RemoveSinhVien(selectedSinhVien);
+                    NapDsSinhVien(); 
+
+                }
             }
-            else
-            {
-                MessageBox.Show("Lỗi rồi");
-            }
+
+           
         }
 
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void toolStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripContainer1_ContentPanel_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void toolStrip2_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click_2(object sender, EventArgs e)
+        {
+           var f = new frmLopHoc();
+            var rs = f.ShowDialog();
+            if (rs == DialogResult.OK)
+            {
+                NapDsLopHoc();
+            } 
+        } 
     }
 }

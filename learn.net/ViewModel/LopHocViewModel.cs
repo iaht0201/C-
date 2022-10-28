@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 
 namespace learn.net.ViewModel
 {
+
+    public enum KetQuaLopHoc
+    {
+        TrungMa,
+        ThanhCong
+    }
     public class LopHocViewModel
     {
         public int ID { get; set; }
         public string TenLop { get; set; }
-        public static List<LopHocViewModel> GetList()
-        {
-            var db = new Model1(); 
-            var rs = db.LopHocs.Select(e => new LopHocViewModel
-            {
-                ID = e.ID,
-                TenLop = e.TenLop
-            }).ToList();
-            return rs;
-        }
+     
 
     }
 }

@@ -61,6 +61,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLopHocs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLopHocs.Designer.cs">
+      <DependentUpon>frmLopHocs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\LopHoc.cs" />
     <Compile Include="Model\Model1.cs" />
     <Compile Include="Model\SinhVien.cs" />
@@ -73,10 +79,15 @@
     <Compile Include="frnSinhVien.Designer.cs">
       <DependentUpon>frnSinhVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\LopHocService.cs" />
+    <Compile Include="Services\SinhVienService.cs" />
     <Compile Include="ViewModel\LopHocViewModel.cs" />
     <Compile Include="ViewModel\SinhVienViewModel.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLopHocs.resx">
+      <DependentUpon>frmLopHocs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frnSinhVien.resx">
       <DependentUpon>frnSinhVien.cs</DependentUpon>
@@ -91,6 +102,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\learn.net.ViewModel.LopHocViewModel.datasource" />
     <None Include="Properties\DataSources\learn.net.ViewModel.SinhVienViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -15,7 +15,7 @@ namespace learn.net.Model
             SinhViens = new HashSet<SinhVien>();
         }
 
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         [StringLength(50)]
         public string TenLop { get; set; }
